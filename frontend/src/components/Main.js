@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import Login from './login/Login';
-import Signup from './signup/Signup';
-// import Delete from './Delete/Delete';
-// import Create from './Create/Create';
-import landingPage from './landingPage/LandingPage';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import login from './login/login';
+import signup from './signup/signup';
+import landingPage from './landingPage/landingPage';
 // Create a Main Component
 class Main extends Component {
   constructor(props) {
@@ -15,10 +14,11 @@ class Main extends Component {
   render() {
     return (
       <div>
-        {/* Render Different Component based on Route */}
-        <Route path="/" component={landingPage} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Router>
+          <Route path="/" component={landingPage} />
+          <Route path="/signup" component={signup} />
+          <Route path="/login" component={login} />
+        </Router>
       </div>
     );
   }
