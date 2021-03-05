@@ -18,6 +18,7 @@ class Main extends Component {
       <div>
         <Router>
           <Route path="/" component={landingPage} />
+          <Route path="/landingPage" component={landingPage} />
           <Route path="/signup" component={signup} />
           <Route path="/login" component={login} />
           <Route path="/dashboard" component={dashboard} />

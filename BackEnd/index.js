@@ -60,12 +60,12 @@ dbconnection.query("SELECT * FROM users WHERE email = ?",[email],(err,output,fie
         if(output.length > 0 ){
         res.status(401).send('Email already exists!!Please Login or use a different email ID');
         }else {
-            dbconnection.query("INSERT INTO users(users_name,email,password) VALUES (?,?,?) ",[username,email,password],(err,ouput,fields)=>{
+            dbconnection.query("INSERT INTO users(users_name,email,password) VALUES (?,?,?) ",[username,email,password],(err,output1,fields)=>{
                     if(err){
                         console.log(err);
                         res.status(400).send('Error!')
                     }else {
-                        res.cookie('cookie_username',output[0].users_name,{maxAge: 900000, httpOnly: false, path : '/'});
+                        res.cookie('cookie_username',username,{maxAge: 900000, httpOnly: false, path : '/'});
                         res.cookie('cookie',email,{maxAge: 900000, httpOnly: false, path : '/'});
                         req.session.user = req.body.username;
                         req.session.email = req.body.email;
@@ -102,7 +102,7 @@ app.post('/login', function(req,res){
                 req.session.cookie.username = output[0].users_name;
                 req.session.cookie.email = email;
                 console.log(req.session.cookie.username,req.session.cookie.email )
-                res.status(200).send('Login Succesful!');
+                res.status(200).send(output[0].users_name);
             }
             else{
                 res.status(401).send('Please enter valid password!');
@@ -115,6 +115,39 @@ app.post('/login', function(req,res){
     })
         
 })
+
+app.post('/createnewgroup',function(req,res){
+    console.log("Inside createnewgroup");  
+    console.log(req.body);
+const username =req.body.username;
+const email =req.body.email;
+const groupname =req.body.groupname;
+dbconnection.query("SELECT * FROM groups WHERE email = ?",[email],(err,output,fields)=> {
+    if(err){
+        console.log(err);
+        res.status(400).send('Error!')
+    }else {
+        if(output.length > 0 ){
+        res.status(401).send('Email already exists!!Please Login or use a different email ID');
+        }else {
+            dbconnection.query("INSERT INTO users(users_name,email,password) VALUES (?,?,?) ",[username,email,password],(err,ouput,fields)=>{
+                    if(err){
+                        console.log(err);
+                        res.status(400).send('Error!')
+                    }else {
+                        res.cookie('cookie_username',output[0].users_name,{maxAge: 900000, httpOnly: false, path : '/'});
+                        res.cookie('cookie',email,{maxAge: 900000, httpOnly: false, path : '/'});
+                        req.session.user = req.body.username;
+                        req.session.email = req.body.email;
+                        console.log(req.session.user)
+                        console.log(req.session.email)
+                        res.status(200).send('Registration succesful!')
+                    }
+        });
+    }
+}
+});
+});
 //start your server on port 3001
 app.listen(3001);
 console.log("Server Listening on port 3001");
