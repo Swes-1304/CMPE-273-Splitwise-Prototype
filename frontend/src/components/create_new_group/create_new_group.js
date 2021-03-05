@@ -3,7 +3,6 @@ import '../../App.css';
 import axios from 'axios';
 // import { cookie } from 'react-cookies';
 import { instanceOf } from 'prop-types';
-// import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 import { withCookies, Cookies } from 'react-cookie';
 
@@ -95,12 +94,17 @@ class createnewgroup extends Component {
   };
 
   render() {
+    let redirectVar = null;
     const { email, username } = this.state;
     const { errorMessage } = this.state;
     const { redirecttogroup } = this.state;
+    if (email == null) {
+      redirectVar = <Redirect to="/" />;
+    }
     console.log(username, email);
     return (
       <div className="content">
+        {redirectVar}
         <h2>START A NEW GROUP</h2>
         <form className="formgroup" id="new_group">
           <div id="group_avatar">
@@ -138,7 +142,7 @@ class createnewgroup extends Component {
                           // value=""
                           name="group[memberships_attributes][1][user_attributes][name]"
                           id="group_memberships_attributes_1_user_attributes_name"
-                          onMouseLeave={this.groupmembersChangeHandler}
+                          onBlur={this.groupmembersChangeHandler}
                           // autoComplete="off"
                         />
                         <input
@@ -166,7 +170,7 @@ class createnewgroup extends Component {
                           // value=""
                           name="group[memberships_attributes][2][user_attributes][name]"
                           id="group_memberships_attributes_2_user_attributes_name"
-                          onMouseLeave={this.groupmembersChangeHandler}
+                          onBlur={this.groupmembersChangeHandler}
                           // autoComplete="off"
                         />
                         <input
@@ -194,7 +198,7 @@ class createnewgroup extends Component {
                           value=""
                           name="group[memberships_attributes][3][user_attributes][name]"
                           id="group_memberships_attributes_3_user_attributes_name"
-                          onMouseLeave={this.groupmembersChangeHandler}
+                          onBlur={this.groupmembersChangeHandler}
                           // autoComplete="off"
                         />
                         <input
