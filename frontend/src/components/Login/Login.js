@@ -29,6 +29,7 @@ const login = () => {
         if (response.status === 200) {
           console.log(response.data);
           dispatch(loginAction(response.data)); // dispatch the action
+
           console.log(usernamestate);
           hist.push('/dashboard');
         } else {
