@@ -2,15 +2,15 @@
 const usernamereducer = (state = { username: '' }, action) => {
   switch (action.type) {
     case 'SIGN_IN':
-      state = { username: action.payload }; // setting the state to username entered while signing up
+      state = { username: action.payload };
       console.log(state);
       return state;
     case 'LOG_IN':
-      state = { username: action.payload }; // setting the state to username returned from the database during login
+      state = { username: action.payload };
       console.log(state);
       return state;
     case 'LOG_OUT':
-      state = { username: '' }; // setting the state back to null after logout
+      state = { username: '' };
       return state;
     default:
       return state;
