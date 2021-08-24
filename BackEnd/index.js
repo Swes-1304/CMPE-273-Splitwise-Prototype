@@ -45,9 +45,9 @@ app.use(function (req, res, next) {
 });
 
 const dbconnection = mysql.createConnection({
-  host: 'swesmysql.co7pzwu1hwvu.us-east-1.rds.amazonaws.com',
+  host: 'swesmysql.*******.rds.amazonaws.com',
   user: 'admin',
-  password: 'Swetha1234',
+  password: '',
   ssl: true,
   database: 'splitwise',
   multipleStatements: true,
